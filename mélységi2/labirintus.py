@@ -36,6 +36,18 @@ def possible_moves(i,j):
 
 def find_values(i,j):
     moves = possible_moves(i,j)
+    if "up" in moves:
+        score_map[i-1][j] = score_map[i][j] + 1
+        find_values(i-1, j)
+    if "down" in moves:
+        score_map[i+1][j] = score_map[i][j] + 1
+        find_values(i+1, j)
+    if "right" in moves:
+        score_map[i][j+1] = score_map[i][j] + 1
+        find_values(i, j+1)
+    if "left" in moves:
+        score_map[i][j-1] = score_map[i][j] + 1
+        find_values(i, j-1)
             
 for i in range(len(map)):
     for j in range(len(map[i])):
@@ -43,5 +55,26 @@ for i in range(len(map)):
             score_map[i][j] = 0
             find_values(i,j)
 
-
+path_matrix = [[0 for j in range(len(map[i]))] for i in range(len(map))]
+for i in range(len(map)):
+    for j in range(len(map[i])):
+        if map[i][j] == "#":
+            path_matrix[i][j] = -1
+        if map[i][j] == "S":
+            path_matrix[i][j] = 9
+        if map[i][j] == "E":
+            path_matrix[i][j] = 8
             
+def find_path(i,j):
+    if i > 0 and score_map[i-1][j] + 1 == score_map[i][j]:
+        path_matrix[i-1][j] = 1
+        find_path(i-1, j)
+    if i < len(map) -1 and score_map[i+1][j] + 1 == score_map[i][j]:
+        path_matrix[i+1][j] = 1
+        find_path(i+1, j)
+
+for i in range(len(map)):
+    for j in range(len(map[i])):
+        if map[i][j] == "S":
+            find_path(i,j)
+                
