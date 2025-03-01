@@ -83,4 +83,9 @@ for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "S":
             find_path(i,j)
+            
+import matplotlib.pyplot as plt # terminálba: pip install matplotlib
+
+plt.imshow(path_matrix)
+plt.show()
                 
