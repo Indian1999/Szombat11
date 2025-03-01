@@ -69,9 +69,15 @@ def find_path(i,j):
     if i > 0 and score_map[i-1][j] + 1 == score_map[i][j]:
         path_matrix[i-1][j] = 1
         find_path(i-1, j)
-    if i < len(map) -1 and score_map[i+1][j] + 1 == score_map[i][j]:
+    elif i < len(map) -1 and score_map[i+1][j] + 1 == score_map[i][j]:
         path_matrix[i+1][j] = 1
         find_path(i+1, j)
+    elif j < len(map[i]) - 1 and score_map[i][j+1] + 1 == score_map[i][j]:
+        path_matrix[i][j+1] = 1
+        find_path(i, j+1)
+    elif j > 0 and score_map[i][j-1] + 1 == score_map[i][j]:
+        path_matrix[i][j-1] = 1
+        find_path(i, j-1)
 
 for i in range(len(map)):
     for j in range(len(map[i])):
