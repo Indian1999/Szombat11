@@ -101,14 +101,20 @@ for i in range(len(map)):
         if map[i][j] == ".":
             shortest_paths[i][j] = [1,1,1]
         
-            
-            
+shortest_paths_list = [shortest_paths]
 def count_shortest_paths(i,j):
     counter = 0
     def f(i,j):
         nonlocal counter
+        shortest_paths_list[counter][i][j] = [0,0.8,0]
         if score_map[i][j] == 0:
             counter += 1
+            shortest_paths = np.zeros((len(map), len(map[0]), 3))
+            for i in range(len(map)):
+                for j in range(len(map[i])):
+                    if map[i][j] == ".":
+                        shortest_paths[i][j] = [1,1,1]
+            shortest_paths_list.append(shortest_paths)
             return
         if i > 0 and score_map[i-1][j] + 1 == score_map[i][j]:
             f(i-1,j)
@@ -128,3 +134,11 @@ for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "S":
             print(count_shortest_paths(i,j))
+            
+    
+plt.figure(figsize=(5,5))        
+for i in range(9):
+    plt.subplot(3,3,i+1)
+    plt.imshow(shortest_paths_list[i])
+    plt.axis("off")
+plt.show()
