@@ -1,3 +1,6 @@
+import numpy as np              # terminálba: pip install numpy
+import matplotlib.pyplot as plt # terminálba: pip install matplotlib
+
 # ctrl + alt + lefele nyíl
 map = [
 ["#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"],
@@ -12,7 +15,7 @@ map = [
 ]
 
 map = []
-with open("mélységi2\input.txt", "r", encoding="utf-8") as f:
+with open("mélységi2\input2.txt", "r", encoding="utf-8") as f:
     for line in f:
         map.append(list(line.strip()))
        
@@ -20,7 +23,7 @@ score_map = [[float("inf") for j in range(len(map[i]))] for i in range(len(map))
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "#":
-            score_map[i][j] = -1
+            score_map[i][j] = -10
 
 def possible_moves(i,j):
     moves = []
@@ -55,7 +58,8 @@ for i in range(len(map)):
             score_map[i][j] = 0
             find_values(i,j)
 
-path_matrix = [[[1,1,1] for j in range(len(map[i]))] for i in range(len(map))]
+path_matrix = np.ones( (len(map), len(map[0]), 3) )
+print(path_matrix)
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "#":
@@ -67,16 +71,16 @@ for i in range(len(map)):
             
 def find_path(i,j):
     if i > 0 and score_map[i-1][j] + 1 == score_map[i][j]:
-        path_matrix[i-1][j] = [0,1,0]
+        path_matrix[i-1][j] = [0,0.5,0]
         find_path(i-1, j)
     elif i < len(map) -1 and score_map[i+1][j] + 1 == score_map[i][j]:
-        path_matrix[i+1][j] = [0,1,0]
+        path_matrix[i+1][j] = [0,0.5,0]
         find_path(i+1, j)
     elif j < len(map[i]) - 1 and score_map[i][j+1] + 1 == score_map[i][j]:
-        path_matrix[i][j+1] = [0,1,0]
+        path_matrix[i][j+1] = [0,0.5,0]
         find_path(i, j+1)
     elif j > 0 and score_map[i][j-1] + 1 == score_map[i][j]:
-        path_matrix[i][j-1] = [0,1,0]
+        path_matrix[i][j-1] = [0,0.5,0]
         find_path(i, j-1)
 
 for i in range(len(map)):
@@ -85,8 +89,6 @@ for i in range(len(map)):
             find_path(i,j)
             
             
-import matplotlib.pyplot as plt # terminálba: pip install matplotlib
-
 plt.imshow(path_matrix)
 plt.show()
                 
