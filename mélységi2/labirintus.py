@@ -55,34 +55,35 @@ for i in range(len(map)):
             score_map[i][j] = 0
             find_values(i,j)
 
-path_matrix = [[0 for j in range(len(map[i]))] for i in range(len(map))]
+path_matrix = [[[1,1,1] for j in range(len(map[i]))] for i in range(len(map))]
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "#":
-            path_matrix[i][j] = -1
+            path_matrix[i][j] = [0,0,0]
         if map[i][j] == "S":
-            path_matrix[i][j] = 9
+            path_matrix[i][j] = [1,1,1]
         if map[i][j] == "E":
-            path_matrix[i][j] = 8
+            path_matrix[i][j] = [1,1,1]
             
 def find_path(i,j):
     if i > 0 and score_map[i-1][j] + 1 == score_map[i][j]:
-        path_matrix[i-1][j] = 1
+        path_matrix[i-1][j] = [0,1,0]
         find_path(i-1, j)
     elif i < len(map) -1 and score_map[i+1][j] + 1 == score_map[i][j]:
-        path_matrix[i+1][j] = 1
+        path_matrix[i+1][j] = [0,1,0]
         find_path(i+1, j)
     elif j < len(map[i]) - 1 and score_map[i][j+1] + 1 == score_map[i][j]:
-        path_matrix[i][j+1] = 1
+        path_matrix[i][j+1] = [0,1,0]
         find_path(i, j+1)
     elif j > 0 and score_map[i][j-1] + 1 == score_map[i][j]:
-        path_matrix[i][j-1] = 1
+        path_matrix[i][j-1] = [0,1,0]
         find_path(i, j-1)
 
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "S":
             find_path(i,j)
+            
             
 import matplotlib.pyplot as plt # terminálba: pip install matplotlib
 
