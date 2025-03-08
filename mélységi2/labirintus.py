@@ -15,7 +15,7 @@ map = [
 ]
 
 map = []
-with open("mélységi2\input2.txt", "r", encoding="utf-8") as f:
+with open("mélységi2\input.txt", "r", encoding="utf-8") as f:
     for line in f:
         map.append(list(line.strip()))
        
@@ -59,7 +59,6 @@ for i in range(len(map)):
             find_values(i,j)
 
 path_matrix = np.ones( (len(map), len(map[0]), 3) )
-print(path_matrix)
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "#":
@@ -90,5 +89,7 @@ for i in range(len(map)):
             
             
 plt.imshow(path_matrix)
-plt.show()
+plt.axis("off")
+plt.savefig("mélységi2\képek\shortest_path.png")
+plt.close()
                 
