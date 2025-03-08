@@ -64,7 +64,7 @@ for i in range(len(map)):
         if map[i][j] == "#":
             path_matrix[i][j] = [0,0,0]
         if map[i][j] == "S":
-            path_matrix[i][j] = [1,1,1]
+            path_matrix[i][j] = [0,0.5,0]
         if map[i][j] == "E":
             path_matrix[i][j] = [1,1,1]
             
@@ -93,3 +93,31 @@ plt.axis("off")
 plt.savefig("mélységi2\képek\shortest_path.png")
 plt.close()
                 
+                
+# Hány különböző lerövidebb út létezik?
+
+def count_shortest_paths(i,j):
+    counter = 0
+    def f(i,j):
+        nonlocal counter
+        if score_map[i][j] == 0:
+            counter += 1
+            return
+        if i > 0 and score_map[i-1][j] + 1 == score_map[i][j]:
+            f(i-1,j)
+        if i < len(map) -1 and score_map[i+1][j] + 1 == score_map[i][j]:
+            f(i+1,j)
+        if j < len(map[i]) - 1 and score_map[i][j+1] + 1 == score_map[i][j]:
+            f(i,j+1)
+        if j > 0 and score_map[i][j-1] + 1 == score_map[i][j]:
+            f(i,j-1)
+    f(i,j)
+    return counter
+
+for row in score_map:
+    print(row)
+    
+for i in range(len(map)):
+    for j in range(len(map[i])):
+        if map[i][j] == "S":
+            print(count_shortest_paths(i,j))
