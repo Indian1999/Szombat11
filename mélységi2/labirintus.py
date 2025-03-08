@@ -95,7 +95,14 @@ plt.close()
                 
                 
 # Hány különböző lerövidebb út létezik?
-
+shortest_paths = np.zeros((len(map), len(map[0]), 3))
+for i in range(len(map)):
+    for j in range(len(map[i])):
+        if map[i][j] == ".":
+            shortest_paths[i][j] = [1,1,1]
+        
+            
+            
 def count_shortest_paths(i,j):
     counter = 0
     def f(i,j):
