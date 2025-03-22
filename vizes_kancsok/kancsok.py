@@ -67,5 +67,24 @@ plt.close()
 
 # pip install scipy
 
+end_nodes = []
+for node in G.nodes():
+    if node[0] == 1: # Ha a 2 literes kancsóban 1 liter víz van, akkor célállapot
+        end_nodes.append(node)
+        
+def plot_path(path, filename = "default"):
+    solution = nx.DiGraph()
+    solution.add_nodes_from(path)
+    for i in range(len(path) - 1):
+        solution.add_edge(path[i], path[i+1])
+    layout = nx.shell_layout(solution)
+    nx.draw(solution, layout, with_labels=True, arrows = True)
+    plt.savefig(f"vizes_kancsok/Képek/Útvonalak/{filename}.png")
+    plt.close()
+        
+        
+paths = list(nx.all_simple_paths(G, start_node, end_nodes))
+for i in range(len(paths)):
+    plot_path(paths[i], f"útvonal_{i+1}")
 
 
