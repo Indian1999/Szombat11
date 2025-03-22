@@ -58,11 +58,14 @@ G.add_edge((0, 3, 2), (2, 1, 2))  #E34
 
 layout = nx.kamada_kawai_layout(G)
 nx.draw(G, layout, with_labels = True, arrows=True)
-plt.show()
+plt.savefig("vizes_kancsok/Képek/állapottér.png")
+plt.close()
 
 #Több kurzor:
 # ctrl + alt + lefele nyíl
 # alt lenyomva tartva + kattintgatás
+
+# pip install scipy
 
 
 
