@@ -30,6 +30,9 @@ while len(open) > 0:
                     if current_node != new_node:
                         G.add_edge(current_node, new_node)
                         
+layout = nx.spring_layout(G)
+nx.draw(G, layout, with_labels=True, arrows=True)
+plt.show()
                     
                     
     
