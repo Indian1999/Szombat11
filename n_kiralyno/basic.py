@@ -4,7 +4,25 @@ chess_board = [[0 for j in range(8)] for i in range(8)]
 # jelölje 0 az üres pozíciót, 1 azt a helyet ahol királynő áll
 
 def hits_another_queen(i,j):
-    pass
+    for col in range(8):
+        if chess_board[i][col] == 1 and col != j:
+            return True
+    for row in range(8):
+        if chess_board[row][j] == 1 and row != i:
+            return True
+    # Átlók ellenőrzése
+    for a in range(1,8):
+        if i - a >= 0  and j - a >= 0 and chess_board[i-a][j-a] == 1:
+            return True
+        if i + a < 8 and j - a >= 0 and chess_board[i+a][j-a] == 1:
+            return True  
+        if i - a >= 0 and j + a < 8 and chess_board[i-a][j+a] == 1:
+            return True  
+        if i + a < 8 and j + a < 8 and chess_board[i+a][j+a] == 1:
+            return True  
+    return False
+    
+    
 
 def is_valid_chess_board():
     """Eldönti, hogy van-e olyan királynő a táblán ami üt egy másikat"""
