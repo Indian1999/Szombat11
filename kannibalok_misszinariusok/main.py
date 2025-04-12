@@ -41,6 +41,34 @@ while len(open_list) > 0:
                 G.add_node(new_node)
             if is_valid(new_node):
                 G.add_edge(current_node, new_node)
+                
+        if current_node[0] - 2 >= current_node[1] or current_node[0] == 2: # 2 misszionárius
+            new_node = (current_node[0] - 2, current_node[1], 0)
+            if is_valid(new_node) and new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            if is_valid(new_node):
+                G.add_edge(current_node, new_node)
+                
+        if 3 - current_node[0] >= 3 - current_node[1] + 2 or current_node[0] == 3: # 2 kannibál
+            new_node = (current_node[0], current_node[1] - 2, 0)
+            if is_valid(new_node) and new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            if is_valid(new_node):
+                G.add_edge(current_node, new_node)
+        
+        if 3 - current_node[0] + 1 >= 3 - current_node[1] + 1: #1 misszionárius, 1 kannibál 
+            new_node = (current_node[0] - 1, current_node[1] - 1, 0)
+            if is_valid(new_node) and new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            if is_valid(new_node):
+                G.add_edge(current_node, new_node)
+            
             
             
     else: # A tutaj a jobb parton van
