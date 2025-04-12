@@ -114,6 +114,10 @@ while len(open_list) > 0:
             if is_valid(new_node):
                 G.add_edge(current_node, new_node)
     
-layout = nx.planar_layout(G)
+layout = nx.shell_layout(G)
 nx.draw(G,layout, with_labels = True, arrows=True)
-plt.show()
+plt.savefig("kannibalok_misszionariusok/allapotter.png")
+
+paths = list(nx.all_simple_paths(G, (3,3,1), (0,0,0)))
+for path in paths:
+    print(path)
