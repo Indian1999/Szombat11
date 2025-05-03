@@ -2,12 +2,17 @@ import random
 
 # Ha egy változót konstansnak szánunk (nem változik az értéke),
 # akkor azt illendő csupa nagybetűvel elnevezni
-TARGET = "Ez itt a genetikus algoritmus programja."
+TARGET = "Hello World!"
 POPULATION_SIZE = 100
 MUTATION_RATE = 0.01 # Egy egyed egy karaktere ennyi eséllyel mutálódik
 GENERATIONS = 1000
 CHARS = "öüóqwertzuiopőúűasdfghjkléáíyxcvbnmÖÜÓQWERTZUIOPŐÚASDFGHJKLÉÁÍYXCVBNM ,.?!"
 
+def population_to_file(populáció, file_path):
+    with open(file_path, "w", encoding = "utf-8") as f:
+        for egyed in populáció:
+            f.write(egyed + "\n")
+            
 def random_egyed():
     """Létrehoz egy a TARGET hosszával megegyező random stringet (egyedet)"""
     egyed = ""
@@ -54,6 +59,7 @@ def genetic_algorithm():
     for generation in range(GENERATIONS):
         best = legjobb(populáció)
         print(f"{generation + 1}. generáció: {best} (Rátermettség: {fitness(best)})")
+        population_to_file(populáció, f"generations/generation{generation+1}.txt")
         
         if best == TARGET:
             print("Optimális megoldás megtalálva!")
