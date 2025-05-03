@@ -17,19 +17,32 @@ def random_egyed():
 
 def fitness(egyed):
     """Visszaadja egy egyednek a rátermettségi értékét (hány karakter egyezik meg a TARGET-hez képest)"""
-    pass
+    fitness_score = 0
+    for i in range(len(TARGET)):
+        if TARGET[i] == egyed[i]:
+            fitness_score += 1
+    return fitness_score
 
 def keresztezés(szülő1, szülő2):
     """2 szülő alapján létrehoz egy új egyedet"""
-    pass
+    index = random.randint(2, len(TARGET) - 2)
+    gyermek = szülő1[:index] + szülő2[index:]
+    return gyermek
 
 def mutáció(egyed):
     """A MUTATION_RATE alapján mutálja az egyes értékeit az egyednek és visszaadja a mutált egyedet"""
-    pass
+    mutált_egyed = ""
+    for char in egyed:
+        if random.random() < MUTATION_RATE:
+            mutált_egyed += random.choice(CHARS)
+        else:
+            mutált_egyed += char
+    return mutált_egyed
 
-def kiválasztás(populáció):
-    """Kiválaszt 5 random egyedet a megadott populációból, és eközül az 5 egyed közül visszaadja a legjobbat"""
-    pass
+def kiválasztás(populáció, k = 5):
+    """Kiválaszt k (alapból 5) random egyedet a megadott populációból, és eközül az 5 egyed közül visszaadja a legjobbat"""
+    egyedek = random.choices(populáció, k = k)
+    return max(egyedek, key = fitness)
 
 def genetic_algorithm():
     """Futtatja a genetikus algoritmust"""
