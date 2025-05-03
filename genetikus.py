@@ -44,8 +44,26 @@ def kiválasztás(populáció, k = 5):
     egyedek = random.choices(populáció, k = k)
     return max(egyedek, key = fitness)
 
+def legjobb(populáció):
+    """Az adott populációból visszaadja a legrátermetteb egyedet"""
+    return max(populáció, key = fitness)
+
 def genetic_algorithm():
     """Futtatja a genetikus algoritmust"""
-    pass
-
+    populáció = [random_egyed() for i in range(POPULATION_SIZE)]
+    for generation in range(GENERATIONS):
+        best = legjobb(populáció)
+        print(f"{generation + 1}. generáció: {best} (Rátermettség: {fitness(best)})")
+        
+        if best == TARGET:
+            print("Optimális megoldás megtalálva!")
+            break
+        
+        új_populáció = [best]
+        while len(új_populáció) != POPULATION_SIZE:
+            egyed = keresztezés(kiválasztás(populáció), kiválasztás(populáció))
+            egyed = mutáció(egyed)
+            új_populáció.append(egyed)
+        populáció = új_populáció[:]
+        
 genetic_algorithm()
