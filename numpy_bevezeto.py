@@ -55,3 +55,30 @@ tömb2 = np.array([4,5,6])
 print(tömb1 + tömb2) # [5 7 9]
 print(tömb1 * 5)
 print(tömb1 ** 2)
+
+
+
+tömb = np.random.randint(10, 100, size = (10, 6))
+print(tömb)
+print("A tömb elemeinek összege:", tömb.sum())
+print("A tömb elemeinek az átlaga:", tömb.mean())
+print("A legnagyobb elem:", tömb.max())
+print("A legkisebb elem:", tömb.min())
+print("A legnagyobb elem indexe:", tömb.argmax())
+print("Oszlopösszeg:", tömb.sum(axis=0))
+print("Szórás:", tömb.std()) # Standard Deviation (Mennyi az átlagos eltérés az átlagtól)
+
+tömb = tömb.reshape((3, 10, 2))
+print(tömb)
+print(tömb.flatten())
+
+mtx1 = np.array([[1,2], [3, 2]]) # n1 x m1 (2x2)
+mtx2 = np.array([[5, 9, 2, 0], [4, 2, 0, 1]])  # n2 x m2 (2x4)
+
+# 2 Mátrix akkor szorozható ha: m1 == n2
+print(np.dot(mtx1, mtx2))
+#print(np.dot(mtx2, mtx1)) VALUE_ERROR
+
+print(mtx2)
+print(mtx2.T) # Transzponált (Sorokból oszlop, az Oszlopokból sort csinál)
+
