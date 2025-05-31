@@ -49,7 +49,30 @@ def total_tip_scatter(file_path = None, show_fig = True):
         plt.show()  
     plt.close()
     
+def total_tip_smoker_scatter(file_path = None, show_fig = True):
+    sns.scatterplot(data=data, x="total_bill", y="tip", hue="smoker")
+    plt.title("Smokers vs Non-smokers")
+    plt.xlabel("Total bill")
+    plt.ylabel("Tip amount")
+    if file_path: 
+        plt.savefig(file_path) 
+    if show_fig:
+        plt.show()  
+    plt.close()
+    
+def data_line_plot(file_path = None, show_fig = True):
+    sns.lineplot(data=data, x="day", y="tip")
+    plt.title("Average tip on different days")
+    plt.xlabel("Day")
+    plt.ylabel("Average tip")
+    if file_path: 
+        plt.savefig(file_path) 
+    if show_fig:
+        plt.show()  
+    plt.close()
     
 days_bar_chart(os.path.join(GRAFS_PATH, "days_tip_bar.png"), False)
 total_bill_hist(os.path.join(GRAFS_PATH, "total_bill_hist.png"), False)
 total_tip_scatter(os.path.join(GRAFS_PATH, "total_tip_scatter.png"), False)
+total_tip_smoker_scatter(os.path.join(GRAFS_PATH, "total_tip_smoker_scatter.png"), False)
+data_line_plot(os.path.join(GRAFS_PATH, "data_line_plot.png"), False)
