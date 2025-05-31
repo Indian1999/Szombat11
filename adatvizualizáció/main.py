@@ -24,5 +24,32 @@ def days_bar_chart(file_path = None, show_fig = True):
     if show_fig:
         plt.show()  # show() az törli a plot tartalmát
     plt.close()
+
+def total_bill_hist(file_path = None, show_fig = True):
+    result = plt.hist(data["total_bill"], bins = 8, edgecolor="black", color = "pink")
+    plt.title("Total bill amount frequency")
+    plt.xlabel("Total bill")
+    plt.ylabel("Count")
+    plt.xticks(ticks = result[1])
+    if file_path: 
+        plt.savefig(file_path) 
+    if show_fig:
+        plt.show()  
+    plt.close()
+    
+def total_tip_scatter(file_path = None, show_fig = True):
+    plt.scatter(data["total_bill"], data["tip"])
+    plt.title("Total Vs Tip Amount")
+    plt.xlabel("Total bill")
+    plt.ylabel("Tip amount")
+    plt.grid(True)
+    if file_path: 
+        plt.savefig(file_path) 
+    if show_fig:
+        plt.show()  
+    plt.close()
+    
     
 days_bar_chart(os.path.join(GRAFS_PATH, "days_tip_bar.png"), False)
+total_bill_hist(os.path.join(GRAFS_PATH, "total_bill_hist.png"), False)
+total_tip_scatter(os.path.join(GRAFS_PATH, "total_tip_scatter.png"), False)
