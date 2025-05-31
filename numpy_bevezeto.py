@@ -11,7 +11,7 @@ print(tömb.shape)
 
 matrix = np.array([[1,2,3], [4,5,6]])
 print(matrix)
-print(matrix.shape)
+print(matrix.shape) # (2, 3)
 
 zeros = np.zeros((5,8)) # 5*8-as mátrix, tele 0-val
 print(zeros)
