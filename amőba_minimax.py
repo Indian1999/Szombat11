@@ -69,3 +69,36 @@ def find_best_move():
                     best_move = (i, j)
     
     return best_move
+
+def game():
+    print("Amőba: Te vagy O, a számítógép az X.")
+    print_board()
+    
+    while True:
+        row = int(input("Add meg a sor számát (0-2): "))
+        col = int(input("Add meg az oszlop számát (0-2): "))
+        if board[row][col] != " ":
+            print("Foglalt mező!")
+            continue  # a következő ciklus iterációra ugrik
+        board[row][col] = "O"
+        print_board()
+        
+        if evaluate() == -1:
+            print("Nyertél!")
+            break
+        if not is_moves_left():
+            print("Döntetlen!")
+            break
+        
+        row, col = find_best_move()
+        board[row][col] = "X"
+        
+        print_board()
+        if evaluate() == 1:
+            print("A számítógép nyert!")
+            break
+        if not is_moves_left():
+            print("Döntetlen!")
+            break
+        
+game()
