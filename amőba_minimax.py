@@ -25,3 +25,32 @@ def evaluate():
     if board[0][2] == board[1][1] == board[2][0] != " ":
         return 1 if board[0][2] == "X" else -1
     return 0
+
+
+def minimax(depth, is_maximizing):
+    score = evaluate()
+    
+    if score == 1 or score == -1:
+        return score
+    if not is_moves_left():
+        return 0
+    
+    if is_maximizing:
+        best = -math.inf # negatív végtelen
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == " ":
+                    board[i][j] = "X"
+                    best = max(best, minimax(depth+1, False)) # következő rekurzióban a mini játékos jön
+                    board[i][j] = " "
+        return best
+    else:
+        best = math.inf # pozitív végtelen
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == " ":
+                    board[i][j] = "O"
+                    best = min(best, minimax(depth+1, True)) # következő rekurzióban a max játékos jön
+                    board[i][j] = " "
+        return best
+        
