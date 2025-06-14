@@ -54,3 +54,18 @@ def minimax(depth, is_maximizing):
                     board[i][j] = " "
         return best
         
+def find_best_move():
+    best_value = -math.inf # alapból a szg. az X (max)
+    best_move = (-1, -1)
+    
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == " ":
+                board[i][j] == "X"
+                move_value = minimax(0, False)
+                board[i][j] = " "
+                if move_value > best_value:
+                    best_value = move_value
+                    best_move = (i, j)
+    
+    return best_move
